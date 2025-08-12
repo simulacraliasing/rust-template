@@ -1,0 +1,4 @@
+[template]
+include = ["**/*"]
+
+exclude = ["cliff.toml"]
