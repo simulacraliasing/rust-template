@@ -1,0 +1,33 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+    - id: check-yaml
+    - id: check-toml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-merge-conflict
+    - id: check-added-large-files
+
+-   repo: local
+    hooks:
+    - id: fmt
+      name: rustfmt
+      description: Check if all files follow the rustfmt style
+      entry: cargo fmt --all -- --check --color always
+      language: system
+      files: \.rs$
+      pass_filenames: false
+    - id: cargo-check
+      name: cargo check
+      description: Check if the project is buildable
+      entry: cargo check
+      language: system
+      files: \.rs$
+    - id: clippy
+      name: cargo clippy
+      description: Run cargo clippy linter
+      entry: cargo clippy --all -- -D warnings
+      language: system
+      files: \.rs$
+      pass_filenames: false

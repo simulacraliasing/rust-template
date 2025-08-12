@@ -1,0 +1,48 @@
+[package]
+name = "{{project-name}}"
+version = "0.1.0"
+edition = "2024"
+authors = ["Zhengyi Dong <zhengyi.dong@outlook.com>"]
+description = "A Rust project"
+repository = "https://github.com/simulacraliasing/{{project-name}}"
+readme = "README.md"
+keywords = []
+categories = []
+
+[dependencies]
+# Common dependencies for robust applications. Uncomment as needed.
+# anyhow = "1.0"
+# thiserror = "2.0.14"
+
+# For serialization/deserialization
+# serde = { version = "1.0", features = ["derive"] }
+# serde_json = "1.0"
+
+# For async runtime
+# tokio = { version = "1", features = ["full"] }
+
+# For logging
+# tracing = "0.1"
+# tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+
+[dev-dependencies]
+
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+opt-level = 3
+panic = "abort"
+
+[workspace.metadata.release]
+pre-release-hook = [
+    "git-cliff",
+    "--output",
+    "CHANGELOG.md",
+    "--tag",
+    "{{version}}",
+]
+pre-release-commit-message = "chore(release): release {{crate_name}} v{{version}}"
+tag-message = "chore(release): release {{crate_name}} v{{version}}"
